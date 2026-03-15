@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOOM</title>
+    <link rel="stylesheet" href="https://v8.js-dos.com/latest/js-dos.css">
+</head>
+<body>
+    <div id="dos-container" style="width: 800px; height: 600px; margin: auto;"></div>
+    <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
+    <script>
+        const container = document.getElementById('dos-container');
+        // Use the local file
+        Dos(container, { wdosbundleUrl: 'doom.jsdos' })
+            .then(ci => {
+                console.log('Game started');
+                // Optional fullscreen button
+                const btn = document.createElement('button');
+                btn.textContent = 'Fullscreen';
+                btn.style.position = 'absolute';
+                btn.style.top = '10px';
+                btn.style.left = '10px';
+                btn.onclick = () => ci.fullscreen();
+                container.appendChild(btn);
+            })
+            .catch(err => {
+                console.error(err);
+                container.innerHTML = `<div style="color:red; padding:20px;">Error: ${err.message}</div>`;
+            });
+    </script>
+</body>
+</html>
